@@ -1,10 +1,10 @@
 import LoginForm from '@/components/auth/login-from'
 import React from 'react'
 
-function Login() {
+function LoginPage() {
   return (
     <LoginForm/>
   )
 }
 
-export default Login
+export default LoginPage
