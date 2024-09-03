@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { LoginSchema } from '@/schemas'
+import { FormError } from "../from-error"
+import { FormSuccess } from "../from-success"
  
 function LoginForm() {
 
@@ -82,6 +84,9 @@ function LoginForm() {
 
                    
                 </div>
+                
+                <FormError message=""/>
+                <FormSuccess message=""/>
                 <Button type="submit"
                 className="w-full">
                     Login
