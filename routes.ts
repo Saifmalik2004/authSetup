@@ -9,7 +9,8 @@ export const publicRoutes=[
 // these route will ridrect logged in user to /settings
 export const authRoutes=[
     '/auth/login',
-    '/auth/register'
+    '/auth/register',
+    '/auth/error'
 
 ];
 // the prefix fro APi authentication routes

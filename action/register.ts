@@ -1,6 +1,8 @@
 "use server"
 import { getUserByEmail } from "@/data/user";
 import prismadb from "@/lib/db";
+import { sendVerificationEmail } from "@/lib/mail";
+import { generateVerificationtoken } from "@/lib/tokens";
 import {  RegisterSchema } from "@/schemas"
 import bcrypt from 'bcryptjs';
 
@@ -31,7 +33,11 @@ export const register= async(values:z.infer< typeof RegisterSchema>)=>{
             password:hashedPassword,
         }
     })
-
-    return {success:" user created"}
+    const verificaionToken=await generateVerificationtoken(email);
+   await sendVerificationEmail(
+    verificaionToken.email,
+    verificaionToken.token
+   )
+    return {success:" Confirmation email sent "}
     
 }
