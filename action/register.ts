@@ -2,7 +2,7 @@
 import { getUserByEmail } from "@/data/user";
 import prismadb from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/mail";
-import { generateVerificationtoken } from "@/lib/tokens";
+import { generateVerificationToken } from "@/lib/tokens";
 import {  RegisterSchema } from "@/schemas"
 import bcrypt from 'bcryptjs';
 
@@ -33,7 +33,7 @@ export const register= async(values:z.infer< typeof RegisterSchema>)=>{
             password:hashedPassword,
         }
     })
-    const verificaionToken=await generateVerificationtoken(email);
+    const verificaionToken=await generateVerificationToken(email);
    await sendVerificationEmail(
     verificaionToken.email,
     verificaionToken.token

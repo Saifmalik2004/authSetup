@@ -7,6 +7,13 @@ export const LoginSchema = z.object({
   password: z.string().min(1, { message: "Password is required" }), // Ensures the password field is not empty
 });
 
+export const ResetSchema = z.object({
+  email: z.string()
+    .min(1, { message: "Email is required" }) // Ensures the email field is not empty
+    .email({ message: "Invalid email address" }), // Validates the email format
+  
+});
+
 
 
 export const RegisterSchema = z.object({

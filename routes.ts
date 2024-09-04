@@ -11,7 +11,8 @@ export const publicRoutes=[
 export const authRoutes=[
     '/auth/login',
     '/auth/register',
-    '/auth/error'
+    '/auth/error',
+    '/auth/reset'
 
 ];
 // the prefix fro APi authentication routes
