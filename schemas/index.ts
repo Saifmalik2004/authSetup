@@ -14,6 +14,15 @@ export const ResetSchema = z.object({
   
 });
 
+export const NewPasswordSchema = z.object({
+  password: z.string()
+    .min(6, { message: "Password must be at least 6 characters long" })
+    .max(100, { message: "Password can't be longer than 100 characters" })
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/, {
+      message: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"
+    }),
+});
+
 
 
 export const RegisterSchema = z.object({
@@ -27,7 +36,7 @@ export const RegisterSchema = z.object({
     .email({ message: "Invalid email address" }),
 
   password: z.string()
-    .min(8, { message: "Password must be at least 6 characters long" })
+    .min(6, { message: "Password must be at least 6 characters long" })
     .max(100, { message: "Password can't be longer than 100 characters" })
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/, {
       message: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"

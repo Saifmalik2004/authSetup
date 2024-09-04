@@ -3,9 +3,9 @@ import React, { useCallback, useState } from 'react'
 import CardWrapper from './card-wrapper'
 import { BeatLoader } from 'react-spinners'
 import { useSearchParams } from 'next/navigation'
-import { newVerification } from '@/action/new-verification'
-import { FormSuccess } from '../from-success'
-import { FormError } from '../from-error'
+import { newVerification } from '@/actions/new-verification'
+import { FormSuccess } from '../form-success'
+import { FormError } from '../form-error'
 import { Button } from '@/components/ui/button'
 
 export const NewVerificationForm = () => {

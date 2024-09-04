@@ -17,9 +17,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { RegisterSchema } from '@/schemas'
-import { FormError } from "../from-error"
-import { FormSuccess } from "../from-success"
-import { register } from "@/action/register"
+import { FormError } from "../form-error"
+import { FormSuccess } from "../form-success"
+import { register } from "@/actions/register"
  
 const RegisterForm=()=> {
 
@@ -105,7 +105,7 @@ const RegisterForm=()=> {
                 
                 <Input 
                  disabled={isPending}
-                 placeholder="*****" type={showPassword ? 'text' : 'password'} {...field} />
+                 placeholder="******" type={showPassword ? 'text' : 'password'} {...field} />
             
           </FormControl>
           <FormMessage />

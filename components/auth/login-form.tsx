@@ -18,9 +18,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { LoginSchema } from '@/schemas'
-import { FormError } from "../from-error"
-import { FormSuccess } from "../from-success"
-import { login } from "@/action/login"
+import { FormError } from "../form-error"
+import { FormSuccess } from "../form-success"
+import { login } from "@/actions/login"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
  
@@ -94,7 +94,7 @@ const LoginForm=()=> {
                 
                 <Input 
                  disabled={isPending}
-                 placeholder="*****" type={showPassword ? 'text' : 'password'} {...field} />
+                 placeholder="******" type={showPassword ? 'text' : 'password'} {...field} />
             
           </FormControl>
           <Button size='sm' variant='link' asChild className="px-0 font-normal">
