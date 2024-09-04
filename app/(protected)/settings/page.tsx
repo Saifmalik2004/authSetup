@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'; // Import the redirect helper from N
 
 const SettingPage= async()=> {
     const session = await auth();
+   
 
     return (
         <div>

@@ -47,6 +47,10 @@ const RegisterForm=()=> {
         .then((data)=>{
          setError(data.error);
          setSuccess(data.success)
+         if (data.success) {
+          form.reset();  // Reset form values here
+      }
+         
         })
      })
     }

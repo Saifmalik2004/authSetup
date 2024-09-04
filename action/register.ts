@@ -3,7 +3,7 @@ import { getUserByEmail } from "@/data/user";
 import prismadb from "@/lib/db";
 import {  RegisterSchema } from "@/schemas"
 import bcrypt from 'bcryptjs';
-import { error } from "console";
+
 import * as z from "zod"
 
 
