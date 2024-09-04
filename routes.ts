@@ -3,6 +3,7 @@
 
 export const publicRoutes=[
     '/',
+    '/auth/new-verification'
 
 ]
 // An array of routes that are user for authentication

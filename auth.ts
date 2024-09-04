@@ -43,6 +43,8 @@ async linkAccount({user}){
   
   callbacks:{
         async signIn({user,account}){
+
+          console.log(user,account)
           // allow Outh without email verification
             if(account?.provider !== 'credentials') return true;
           //prevent signin without email verifiation
