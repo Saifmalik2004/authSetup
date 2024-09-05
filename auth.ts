@@ -45,13 +45,13 @@ async linkAccount({user}){
   callbacks:{
         async signIn({user,account}){
 
-          console.log(user,account)
+          
           // allow Outh without email verification
             if(account?.provider !== 'credentials') return true;
           //prevent signin without email verifiation
             if(user.id){
             const existingUser=await getUserByID(user.id)
-            
+
             if( !existingUser?.emailVerified) return true
 
             if(existingUser.isTwoFactorEnabled) {
@@ -71,7 +71,7 @@ async linkAccount({user}){
 
         },
         async session({session,token}){
-            console.log({sessionTOken:token})
+           
             if(token.sub && session.user){
                 session.user.id= token.sub
             }
