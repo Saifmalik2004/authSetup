@@ -41,3 +41,18 @@ export async function sendPasswordResetEmail(
       });
   
   }
+
+  export async function sendTwoFactorTokenEMail(
+    email: string,
+    token: string
+  ) {
+    const user=await getUserByEmail(email)
+    
+      const info = await transporter.sendMail({
+        from: process.env.GMAIL_USER, // Your Gmail address
+        to: email,
+        subject: '2FA Code  ',
+        html: `<p>Hello ${user?.name},</p><p>Please use the following  code to complete your 2FA:</p><h1>${token}</h1><p>If you did not request this code, please ignore this email.</p>`,
+      });
+  
+  }

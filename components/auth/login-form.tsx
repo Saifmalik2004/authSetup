@@ -28,6 +28,8 @@ const LoginForm=()=> {
  const searchParams=useSearchParams();
  const urlError=searchParams.get('error')==='OAuthAccountNotLinked'
 ?"Email already in use with different provider! ":'';
+
+    const [showTwoFactor,setShowTwoFactor]=useState(false)
     const [showPassword, setShowPassword] = useState(false); 
     const [error, setError] = useState<string |undefined>('')
     const [success, setSuccess] = useState<string |undefined>('')
@@ -38,7 +40,8 @@ const LoginForm=()=> {
         resolver:zodResolver(LoginSchema),
         defaultValues:{
             email:"",
-            password:""
+            password:"",
+            code:""
 
         }
     })
@@ -50,11 +53,21 @@ const LoginForm=()=> {
         login(values)
         .then((data)=>{
           
-            setError(data?.error);
-          
-            setSuccess(data?.success);
+            if(data?.error){
+              form.reset();
+              setError(data.error);
+            }
+
+            if(data?.success){
+              form.reset();
+              setSuccess(data.success);
+            }
+            if(data?.twoFactor){
+              setShowTwoFactor(true)
+            }
           
         })
+        .catch(()=> setError("Something went wrong"))
      })
     }
   return (
@@ -67,7 +80,25 @@ const LoginForm=()=> {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
-                    <FormField
+                    {showTwoFactor && (
+                       <FormField
+                       control={form.control}
+                       name='code'
+                       render={({field})=>(
+                           <FormItem>
+                 <FormLabel>Two Factor Code</FormLabel>
+                 <FormControl>
+                   <Input  disabled={isPending} placeholder="123456"  {...field} />
+                   
+                 </FormControl>
+                 <FormMessage />
+               </FormItem>
+                       )}
+                       />
+                    )}
+                    {!showTwoFactor &&(
+                      <>
+                      <FormField
                     control={form.control}
                     name='email'
                     render={({field})=>(
@@ -107,6 +138,9 @@ const LoginForm=()=> {
             </FormItem>
                     )}
                     />
+                    </>
+                    )
+                    }
 
                    
                 </div>
@@ -117,7 +151,7 @@ const LoginForm=()=> {
                 disabled={isPending}
                 type="submit"
                 className="w-full">
-                    Login
+                  {showTwoFactor?"Confirm":"Login"}
                 </Button>
             </form>
 

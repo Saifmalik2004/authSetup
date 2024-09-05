@@ -6,6 +6,7 @@ import prismadb from "./lib/db";
 import { getUserByID } from "./data/user";
 import { JWT } from "next-auth/jwt"
 import { UserRole } from "@prisma/client";
+import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
 
 declare module "next-auth" {
     interface Session {
@@ -50,10 +51,22 @@ async linkAccount({user}){
           //prevent signin without email verifiation
             if(user.id){
             const existingUser=await getUserByID(user.id)
+            
             if( !existingUser?.emailVerified) return true
+
+            if(existingUser.isTwoFactorEnabled) {
+              const twoFactorConfirmation=await getTwoFactorConfirmationByUserId(existingUser.id)
+              if(!twoFactorConfirmation) return false
+          
+            //Delete Two factor confirmation for next sign in
+            await prismadb.twoFactorConfirmation.delete({
+              where:{id:twoFactorConfirmation.id}
+            });
+
+            }
             }
 
-            //2fa
+            
             return true
 
         },
