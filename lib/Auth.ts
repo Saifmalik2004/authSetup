@@ -5,3 +5,10 @@ export const currentUserwithauth=async()=>{
 
     return session?.user;
 }
+
+
+export const currentRolewithauth=async()=>{
+    const session=await auth();
+
+    return session?.user?.role;
+}
