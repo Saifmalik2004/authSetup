@@ -30,9 +30,7 @@ import { ExitIcon } from "@radix-ui/react-icons"
     <LogoutButton>
     <DropdownMenuItem><ExitIcon className="h-4 w-4 mr-2"/>Logout</DropdownMenuItem>
     </LogoutButton>
-    <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Team</DropdownMenuItem>
-    <DropdownMenuItem>Subscription</DropdownMenuItem>
+    
   </DropdownMenuContent>
 </DropdownMenu>
     )

@@ -9,7 +9,7 @@ import { generateTwoFactorToken, generateVerificationToken } from "@/lib/tokens"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 import { LoginSchema } from "@/schemas"
 import { AuthError } from "next-auth"
-
+import bcrypt from 'bcryptjs'
 import * as z from "zod"
 
 
@@ -27,6 +27,16 @@ export const login= async(values:z.infer< typeof LoginSchema>)=>{
     if(!existingUser || !existingUser.email || !existingUser.password){
         return {error:"Email does not exist!"}
     }
+    
+    
+        
+
+        
+    
+    const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+    if (!isPasswordCorrect) {
+      return { error: "Invalid password!" };
+    }
     if(!existingUser.emailVerified){
         
         const verificaionToken=await generateVerificationToken(existingUser.email)
@@ -35,6 +45,9 @@ export const login= async(values:z.infer< typeof LoginSchema>)=>{
         return { success: " Confirmation Email sent!" } as const;
     }
     if(existingUser.isTwoFactorEnabled && existingUser.email){
+        
+        
+
         if(code){
            const twoFactorToken=await getTwoFactorTokenByEmail(
             existingUser.email

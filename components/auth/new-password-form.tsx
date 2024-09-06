@@ -25,7 +25,7 @@ export const NewPasswordForm = () => {
     const [error, setError] = useState<string | undefined>('')
     const [success, setSuccess] = useState<string | undefined>('')
     const [isPending, startTransition] = useTransition()
-
+    
 
     const searchParams = useSearchParams();
     const token = searchParams.get("token");
@@ -44,8 +44,16 @@ export const NewPasswordForm = () => {
         startTransition(() => {
             newPassword(values,token)
                 .then((data) => {
-                    setError(data?.error)
-                    setSuccess(data?.success)
+                    if(data?.error){
+              
+                        setError(data.error);
+                      }
+          
+                      if(data?.success){
+                        
+                        setSuccess(data.success);
+                        
+                      }
                 })
                 .catch(() => {
                     setError("Something went wrong")

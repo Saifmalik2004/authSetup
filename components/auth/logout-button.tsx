@@ -1,6 +1,7 @@
 "use client"
 
 import { logout } from "@/actions/logout";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 
@@ -15,7 +16,7 @@ const LogoutButton:React.FC<LogoutButtonProps>=({
 })=> {
    const router=useRouter();
     const onClick=()=>{
-     logout()
+     signOut()
     }
   return (
    <span onClick={onClick} className='cursor-pointer'>

@@ -30,12 +30,13 @@ const CardWrapper=({
         <CardContent>
         {children}
         </CardContent>
+        
+        <CardFooter className="flex flex-col space-y-4 ">
         {showSocial && (
-            <CardFooter>
-                <Social/>
-            </CardFooter>
-        )}
-        <CardFooter>
+            
+            <Social/>
+       
+    )}
             <BackButton label={backButtonLabel} href={backButtonHref}/>
         </CardFooter>
     

@@ -54,7 +54,7 @@ const LoginForm=()=> {
         .then((data)=>{
           
             if(data?.error){
-              form.reset();
+              
               setError(data.error);
             }
 
@@ -75,7 +75,7 @@ const LoginForm=()=> {
     headerLabel='Welcome back'
     backButtonHref='/auth/register'
     backButtonLabel="Don't have an account?"
-    showSocial>
+     showSocial={!showTwoFactor ?true:false}>
         
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
